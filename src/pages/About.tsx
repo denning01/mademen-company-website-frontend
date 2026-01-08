@@ -1,130 +1,106 @@
-import { useState, useEffect } from 'react'
-import { Helmet } from 'react-helmet' // For SEO tags
+import "../styles/About.css"
+import { useEffect } from "react"
 
 function About() {
-  const [message, setMessage] = useState('')
-  const [status, setStatus] = useState('')
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setStatus('Sending your message...')
-
-    try {
-      const response = await fetch('/api/send-message', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message }),
-      })
-
-      if (response.ok) {
-        setStatus('Message sent successfully!')
-        setMessage('')
-      } else {
-        setStatus('Failed to send message.')
-      }
-    } catch (error) {
-      console.error(error)
-      setStatus('An error occurred. Try again.')
-    }
-  }
-
-  // Optional: structured data for SEO
   useEffect(() => {
-    const script = document.createElement('script')
-    script.type = 'application/ld+json'
-    script.innerHTML = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "WEBMAN X MADEMEN",
-      "url": "https://yourwebsite.com",
-      "logo": "https://yourwebsite.com/logo.png",
-      "sameAs": [
-        "https://www.linkedin.com/company/webmanx-mademen",
-        "https://www.facebook.com/webmanx.mademen"
-      ],
-      "description": "WEBMAN X MADEMEN is a web development and digital solutions company in Nairobi, Kenya, specializing in responsive websites, web apps, and digital marketing services."
-    })
-    document.head.appendChild(script)
+    document.title = "About Us | WEBMAN X MADEMEN"
   }, [])
 
   return (
-    <div style={styles.container}>
-      {/* SEO Meta tags */}
-      <Helmet>
-        <title>About WEBMAN X MADEMEN – Web Development & Digital Solutions in Nairobi</title>
-        <meta
-          name="description"
-          content="Learn about WEBMAN X MADEMEN, a web development and digital solutions company in Nairobi. We create responsive websites, web apps, and offer digital marketing services."
-        />
-      </Helmet>
+    <div className="page">
+      {/* HERO */}
+      <section className="hero">
+        <h1 className="hero-title">About WEBMAN X MADEMEN</h1>
+        <p className="hero-text">
+          We design and build modern, scalable, and high-performance digital
+          products that help ambitious businesses grow online.
+        </p>
+      </section>
 
-      <h1>About WEBMAN X MADEMEN</h1>
-      <p>
-        WEBMAN X MADEMEN is a creative web development and digital solutions company based in Nairobi, Kenya.
-        We specialize in building responsive websites, web applications, and digital marketing solutions that help businesses grow online.
-      </p>
+      {/* WHO WE ARE */}
+      <section className="section">
+        <h2 className="section-title">Who We Are</h2>
+        <p className="text">
+          WEBMAN X MADEMEN is a digital solutions studio focused on crafting
+          exceptional web experiences. We combine strong design principles,
+          modern frontend technologies, and reliable backend systems to deliver
+          products that are fast, secure, and built to scale.
+        </p>
+      </section>
 
-      <h2>Our Mission</h2>
-      <p>
-        Our mission is to empower businesses with modern web technologies, intuitive design, and scalable digital solutions.
-        We focus on delivering fast, mobile-friendly, and user-centric websites that make an impact.
-      </p>
+      {/* MISSION */}
+      <section className="section alt">
+        <h2 className="section-title">Our Mission</h2>
+        <p className="text">
+          Our mission is to empower businesses with technology that works.
+          Whether you’re a startup or an established brand, we help you turn
+          ideas into powerful digital products that drive growth and results.
+        </p>
+      </section>
 
-      <h2>Connect With Us</h2>
-      <p>Have questions or want to reach out? Send us a message below!</p>
+      {/* EXPERTISE */}
+      <section className="section">
+        <h2 className="section-title">What We Do Best</h2>
 
-      <form style={styles.form} onSubmit={handleSubmit}>
-        <textarea
-          placeholder="Your message"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          required
-          style={styles.textarea}
-        />
+        <div className="expertise-grid">
+          <div className="expertise-card">
+            <h3>Frontend Development</h3>
+            <p>
+              Modern, responsive, and accessible interfaces built with React and
+              cutting-edge web technologies.
+            </p>
+          </div>
 
-        <button type="submit" style={styles.button}>Send Message</button>
+          <div className="expertise-card">
+            <h3>Backend & APIs</h3>
+            <p>
+              Secure, scalable backend systems and APIs designed for performance
+              and long-term maintainability.
+            </p>
+          </div>
 
-        {status && <p style={styles.status}>{status}</p>}
-      </form>
+          <div className="expertise-card">
+            <h3>UI / UX Design</h3>
+            <p>
+              Clean, intuitive user experiences that keep users engaged and
+              convert visitors into customers.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* TRUSTED BY */}
+      <section className="section alt">
+        <h2 className="section-title">Trusted by Industry Leaders</h2>
+        <p className="text center">
+          Our approach and standards are inspired by the world’s leading
+          organizations.
+        </p>
+
+        <div className="logo-marquee">
+          <div className="logo-track">
+            <img src="/logos/google.svg" alt="Google" />
+            <img src="/logos/microsoft.svg" alt="Microsoft" />
+            <img src="/logos/amazon.svg" alt="Amazon" />
+            <img src="/logos/apple.svg" alt="Apple" />
+            <img src="/logos/meta.svg" alt="Meta" />
+            <img src="/logos/ibm.svg" alt="IBM" />
+            <img src="/logos/oracle.svg" alt="Oracle" />
+            <img src="/logos/netflix.svg" alt="Netflix" />
+            <img src="/logos/tesla.svg" alt="Tesla" />
+            <img src="/logos/salesforce.svg" alt="Salesforce" />
+
+            {/* duplicate for seamless loop */}
+            <img src="/logos/google.svg" alt="Google" />
+            <img src="/logos/microsoft.svg" alt="Microsoft" />
+            <img src="/logos/amazon.svg" alt="Amazon" />
+            <img src="/logos/apple.svg" alt="Apple" />
+            <img src="/logos/meta.svg" alt="Meta" />
+          </div>
+        </div>
+      </section>
     </div>
   )
 }
 
 export default About
-
-const styles = {
-  container: {
-    maxWidth: '700px',
-    margin: '4rem auto',
-    padding: '2rem',
-    textAlign: 'center' as const,
-    lineHeight: '1.6',
-    fontFamily: 'Arial, sans-serif',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column' as const,
-    gap: '1rem',
-    marginTop: '2rem',
-  },
-  textarea: {
-    padding: '0.75rem',
-    borderRadius: '6px',
-    border: '1px solid #d1d5db',
-    fontSize: '1rem',
-    minHeight: '120px',
-  },
-  button: {
-    padding: '0.75rem',
-    borderRadius: '6px',
-    border: 'none',
-    backgroundColor: '#2563eb',
-    color: '#fff',
-    fontWeight: 500,
-    cursor: 'pointer',
-  },
-  status: {
-    marginTop: '1rem',
-    fontWeight: 500,
-  },
-}

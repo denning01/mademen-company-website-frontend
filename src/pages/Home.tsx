@@ -1,131 +1,275 @@
+import { motion } from 'framer-motion'
+
+/* =======================
+   SERVICES DATA
+======================= */
+const services = [
+  {
+    title: 'Website Design',
+    description:
+      'Clean, modern, and user-friendly designs tailored to your brand.',
+  },
+  {
+    title: 'Web Development',
+    description:
+      'Fast, secure, and scalable websites built with modern technologies.',
+  },
+  {
+    title: 'E-Commerce',
+    description:
+      'Powerful online stores that convert visitors into customers.',
+  },
+]
+
+/* =======================
+   ANIMATION VARIANTS
+======================= */
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 },
+  },
+}
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  show: { opacity: 1, y: 0, scale: 1 },
+}
+
+/* =======================
+   COMPONENT
+======================= */
 function Home() {
   return (
-    <div>
-      {/* Hero Section */}
-      <section style={styles.hero}>
-        <h1 style={styles.title}>
+    <div style={styles.page}>
+      {/* HERO */}
+      <motion.section
+        style={styles.hero}
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        <motion.h1
+          style={styles.title}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+        >
           We Design Beautiful & High-Performing Websites
-        </h1>
-        <p style={styles.subtitle}>
+        </motion.h1>
+
+        <motion.p
+          style={styles.subtitle}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+        >
           Helping businesses grow online with modern, responsive, and scalable
           web solutions.
-        </p>
+        </motion.p>
 
         <div style={styles.buttons}>
-          <button style={styles.primaryBtn}>Get Started</button>
-          <button style={styles.secondaryBtn}>View Our Work</button>
+          <motion.button
+            style={styles.primaryBtn}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Get Started
+          </motion.button>
+
+          <motion.button
+            style={styles.secondaryBtn}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            View Our Work
+          </motion.button>
         </div>
+      </motion.section>
+
+      {/* SERVICES */}
+      <section style={styles.section}>
+        <motion.h2
+          style={styles.sectionTitle}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          What We Do
+        </motion.h2>
+
+        <motion.div
+          style={styles.services}
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+        >
+          {services.map((service) => (
+            <motion.div
+              key={service.title}
+              style={styles.card}
+              variants={cardVariants}
+              whileHover={{
+                y: -8,
+                boxShadow: '0 15px 35px rgba(0,0,0,0.12)',
+              }}
+              transition={{ duration: 0.3 }}
+            >
+              <h3 style={styles.cardTitle}>{service.title}</h3>
+              <p style={styles.cardText}>{service.description}</p>
+            </motion.div>
+          ))}
+        </motion.div>
       </section>
 
-      {/* Services Section */}
-<section id="services" style={styles.section}>
-  <h2 style={styles.sectionTitle}>What We Do</h2>
-
-  <div style={styles.services}>
-    <div style={styles.card}>
-      <h3>Website Design</h3>
-      <p>
-        Clean, modern, and user-friendly designs tailored to your brand.
-      </p>
-    </div>
-
-    <div style={styles.card}>
-      <h3>Web Development</h3>
-      <p>
-        Fast, secure, and scalable websites built with modern
-        technologies.
-      </p>
-    </div>
-
-    <div style={styles.card}>
-      <h3>E-Commerce</h3>
-      <p>
-        Powerful online stores that convert visitors into customers.
-      </p>
-    </div>
-  </div>
-</section>
-
-
-      {/* Call To Action */}
-      <section style={styles.cta}>
-        <h2>Let’s Build Your Next Website</h2>
-        <p>
+      {/* CTA */}
+      <motion.section
+        style={styles.cta}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        <h2 style={styles.ctaTitle}>Let’s Build Your Next Website</h2>
+        <p style={styles.ctaText}>
           Ready to take your business online or improve your current website?
         </p>
-        <button style={styles.primaryBtn}>Contact Us</button>
-      </section>
+
+        <motion.button
+          style={styles.primaryBtn}
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          Contact Us
+        </motion.button>
+      </motion.section>
     </div>
   )
 }
 
 export default Home
 
+/* =======================
+   STYLES
+======================= */
 const styles = {
+  page: {
+    fontFamily:
+      "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
+    color: '#0f172a',
+    lineHeight: 1.6,
+  },
+
   hero: {
-    padding: '5rem 2rem',
+    padding: '6rem 2rem',
     textAlign: 'center' as const,
-    backgroundColor: '#111827',
+    background:
+      'linear-gradient(135deg, #0f172a 0%, #020617 100%)',
     color: '#ffffff',
   },
+
   title: {
-    fontSize: '2.5rem',
+    fontSize: 'clamp(2rem, 5vw, 3rem)',
+    fontWeight: 800,
     marginBottom: '1rem',
+    letterSpacing: '-0.02em',
   },
+
   subtitle: {
-    fontSize: '1.1rem',
-    maxWidth: '600px',
-    margin: '0 auto 2rem',
-    color: '#d1d5db',
+    fontSize: '1.125rem',
+    maxWidth: '650px',
+    margin: '0 auto 2.5rem',
+    color: '#cbd5f5',
   },
+
   buttons: {
     display: 'flex',
     justifyContent: 'center',
     gap: '1rem',
+    flexWrap: 'wrap' as const,
   },
+
   primaryBtn: {
-    padding: '0.75rem 1.5rem',
+    padding: '0.8rem 1.75rem',
     backgroundColor: '#2563eb',
-    color: '#fff',
+    color: '#ffffff',
     border: 'none',
-    borderRadius: '6px',
+    borderRadius: '10px',
+    fontSize: '0.95rem',
+    fontWeight: 600,
     cursor: 'pointer',
-    fontWeight: 500,
   },
+
   secondaryBtn: {
-    padding: '0.75rem 1.5rem',
+    padding: '0.8rem 1.75rem',
     backgroundColor: 'transparent',
-    color: '#fff',
-    border: '1px solid #fff',
-    borderRadius: '6px',
+    color: '#ffffff',
+    border: '1px solid rgba(255,255,255,0.3)',
+    borderRadius: '10px',
+    fontSize: '0.95rem',
+    fontWeight: 600,
     cursor: 'pointer',
-    fontWeight: 500,
   },
+
   section: {
-    padding: '4rem 2rem',
+    padding: '5rem 2rem',
     textAlign: 'center' as const,
+    backgroundColor: '#ffffff',
   },
+
   sectionTitle: {
-    fontSize: '2rem',
-    marginBottom: '2rem',
+    fontSize: '2.25rem',
+    fontWeight: 700,
+    marginBottom: '2.5rem',
+    letterSpacing: '-0.02em',
   },
+
   services: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-    gap: '1.5rem',
-    maxWidth: '1000px',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+    gap: '2rem',
+    maxWidth: '1100px',
     margin: '0 auto',
   },
+
   card: {
-    padding: '2rem',
-    borderRadius: '8px',
-    backgroundColor: '#f9fafb',
-    boxShadow: '0 4px 10px rgba(0,0,0,0.05)',
+    padding: '2.5rem 2rem',
+    borderRadius: '16px',
+    backgroundColor: '#ffffff',
+    boxShadow: '0 10px 30px rgba(2, 6, 23, 0.08)',
+    textAlign: 'left' as const,
   },
+
+  cardTitle: {
+    fontSize: '1.25rem',
+    fontWeight: 700,
+    marginBottom: '0.75rem',
+  },
+
+  cardText: {
+    color: '#475569',
+    fontSize: '0.95rem',
+  },
+
   cta: {
-    padding: '4rem 2rem',
+    padding: '5rem 2rem',
     textAlign: 'center' as const,
-    backgroundColor: '#f3f4f6',
+    background:
+      'linear-gradient(135deg, #2563eb 0%, #1e40af 100%)',
+    color: '#ffffff',
+  },
+
+  ctaTitle: {
+    fontSize: '2rem',
+    fontWeight: 700,
+    marginBottom: '0.75rem',
+  },
+
+  ctaText: {
+    marginBottom: '1.5rem',
+    opacity: 0.95,
   },
 }
-
