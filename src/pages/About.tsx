@@ -10,7 +10,7 @@ function About() {
     <div className="page">
       {/* HERO */}
       <section className="hero">
-        <h1 className="hero-title">About WEBMAN X MADEMEN</h1>
+        <h1 className="hero-title">About: WEBMAN X MADEMEN</h1>
         <p className="hero-text">
           We design and build modern, scalable, and high-performance digital
           products that help ambitious businesses grow online.
