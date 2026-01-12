@@ -1,3 +1,6 @@
+import React from "react";
+
+
 import { NavLink } from "react-router-dom";
 import {
   FaLinkedin,
@@ -76,7 +79,17 @@ export default Footer;
 
 //styles
 
-const styles = {
+const styles: {
+  footer: React.CSSProperties;
+  logo: React.CSSProperties;
+  links: React.CSSProperties;
+  link: React.CSSProperties;
+  contact: React.CSSProperties;
+  contactItem: React.CSSProperties;
+  socials: React.CSSProperties;
+  icon: React.CSSProperties;
+  copy: React.CSSProperties;
+} = {
   footer: {
     backgroundColor: "#0f172a",
     color: "#e5e7eb",
@@ -92,7 +105,6 @@ const styles = {
     fontSize: "22px",
     fontWeight: "bold",
     letterSpacing: "1.2px",
-    animation: "fadeIn 1s ease-in-out",
   },
 
   links: {
@@ -106,7 +118,6 @@ const styles = {
     color: "#cbd5f5",
     textDecoration: "none",
     fontSize: "14px",
-    transition: "color 0.3s ease",
   },
 
   contact: {
@@ -133,6 +144,7 @@ const styles = {
   icon: {
     fontSize: "22px",
     color: "#cbd5f5",
+    cursor: "pointer",
     transition: "transform 0.3s ease, color 0.3s ease",
   },
 
